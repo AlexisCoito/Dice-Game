@@ -556,17 +556,16 @@ GameObject:
   m_Component:
   - component: {fileID: 55327799}
   - component: {fileID: 55327804}
-  - component: {fileID: 55327803}
   - component: {fileID: 55327802}
-  - component: {fileID: 55327801}
   - component: {fileID: 55327800}
+  - component: {fileID: 55327801}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &55327799
 Transform:
   m_ObjectHideFlags: 0
@@ -650,7 +649,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 55327798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d9586bb41c1c64b9e63563914a489d, type: 3}
+  m_Script: {fileID: 11500000, guid: 55c1adb8c69199d4cae8c9038db0e999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensivity: 100
@@ -689,14 +688,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!81 &55327803
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55327798}
-  m_Enabled: 1
 --- !u!20 &55327804
 Camera:
   m_ObjectHideFlags: 0
@@ -716,9 +707,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.5
     y: 0
-    width: 1
+    width: 0.5
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -7385,7 +7376,7 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
+    width: 0.5
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -11206,10 +11197,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7170758d0aa45c740acac40e8b0b5314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 1386437948}
+  player2: {fileID: 1863469981}
   mouseSensivity: 300
-  speed: 6
   controller: {fileID: 1386437949}
   jumpHeight: 2
+  gameManager: {fileID: 2039012109}
   dado: {fileID: 2587440022560210565, guid: 9a2488090efe2f043befd858742a3be7, type: 3}
   groundCheck: {fileID: 1855860715}
   groundDistance: 0.4
@@ -11217,7 +11210,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   gravity: -19.62
-  isPlayerTurn: 0
+  rotate1: {x: 0, y: 0, z: 0}
+  rotate2: {x: 0, y: 0, z: 0}
+  isPlayer1Turn: 0
+  isPlayer2Turn: 0
 --- !u!23 &1386437951
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14978,15 +14974,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863469981}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f0bc2f57b9816348a1239c595d3a515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
   mouseSensivity: 300
-  speed: 6
   controller: {fileID: 1863469982}
   jumpHeight: 2
+  gameManager: {fileID: 0}
   dado: {fileID: 2587440022560210565, guid: 9a2488090efe2f043befd858742a3be7, type: 3}
   groundCheck: {fileID: 2014009404}
   groundDistance: 0.4
@@ -14994,7 +14992,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   gravity: -19.62
-  isPlayerTurn: 0
+  rotate1: {x: 0, y: 0, z: 0}
+  rotate2: {x: 0, y: 0, z: 0}
+  isPlayer1Turn: 0
+  isPlayer2Turn: 0
 --- !u!23 &1863469984
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15072,10 +15073,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f7e4a94c72bcd48b4563feecc3492d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 1386437948}
+  player2: {fileID: 1863469981}
   mouseSensivity: 300
-  speed: 6
   controller: {fileID: 1863469982}
   jumpHeight: 2
+  gameManager: {fileID: 2039012109}
   dado: {fileID: 2587440022560210565, guid: 9a2488090efe2f043befd858742a3be7, type: 3}
   groundCheck: {fileID: 2014009404}
   groundDistance: 0.4
@@ -15083,7 +15086,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   gravity: -19.62
-  isPlayerTurn: 0
+  rotate1: {x: 0, y: 0, z: 0}
+  rotate2: {x: 0, y: 0, z: 0}
+  isPlayer1Turn: 0
+  isPlayer2Turn: 0
 --- !u!1001 &1867509434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16234,8 +16240,8 @@ MonoBehaviour:
   - {fileID: 1863469981}
   dado1: 0
   dado2: 0
-  player1: {fileID: 1386437950}
-  player2: {fileID: 1863469987}
+  playerController: {fileID: 1386437950}
+  dadoController: {fileID: 460561173058944724, guid: 9a2488090efe2f043befd858742a3be7, type: 3}
 --- !u!4 &2039012110
 Transform:
   m_ObjectHideFlags: 0

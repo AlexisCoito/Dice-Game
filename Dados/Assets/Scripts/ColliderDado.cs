@@ -9,8 +9,10 @@ public class ColliderDado : MonoBehaviour
     private GameObject objVacio;
     public bool cualqueircosa = false;
     public RaycastHit hit;
-    int caraActual = 0;
+    public int caraActual = 0;
     nodoCara[] nodo = new nodoCara[6];
+    GameObject gameManager;
+
     public struct nodoCara
     {
         public int valor;
@@ -18,7 +20,8 @@ public class ColliderDado : MonoBehaviour
     }
     
     void Start()
-    {
+    {   
+        gameManager = GameObject.Find("GameManager");
         objVacio = GameObject.Find("Lector");
         mirb = GetComponent<Rigidbody>();
         for (int i = 0; i < 6; i++)
@@ -60,6 +63,7 @@ public class ColliderDado : MonoBehaviour
                     if (hit.collider.name == nodo[i].nombre)
                     {
                         caraActual = nodo[i].valor;
+                        gameManager.SendMessage("ValuesUpdate", caraActual);
                         //una vez que ya usemos caraActual tiene que ser 0 denuevo
                         Debug.Log(caraActual);
 

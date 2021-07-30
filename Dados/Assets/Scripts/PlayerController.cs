@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject player1;
+    public GameObject player2;
+
+
     float horizontalInput;
     float verticalInput;
     [SerializeField] float mouseSensivity;
-    [SerializeField] float speed = 12f;
+    protected float speed = 12f;
     public CharacterController controller;
     public float jumpHeight = 3f;
+    public GameManager gameManager;
 
     public GameObject dado;
+    Dado dadoS;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -19,18 +25,22 @@ public class PlayerController : MonoBehaviour
 
     public float gravity = -9.81f;
 
-    Vector3 velocity;
-    bool isGrounded;
+    protected Vector3 velocity;
+    protected bool isGrounded;
 
     Quaternion randomQuat;
+    public Vector3 rotate1;
+    public Vector3 rotate2;
 
-    public bool isPlayerTurn;
+    public bool isPlayer1Turn;
+    public bool isPlayer2Turn;
 
     // Update is called once per frame
     void Update()
     {
         randomQuat = new Quaternion(Random.Range(-1, 2), Random.Range(-1, 2), Random.Range(-1, 2), Random.Range(-1, 2));
-        Vector3 rotate = transform.position + (Camera.main.transform.forward)*1.5f;
+        rotate1 = player1.transform.position + (Camera.main.transform.forward)*1.5f;
+        rotate2 = player2.transform.position + (Camera.main.transform.forward) * 1.5f;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -40,41 +50,51 @@ public class PlayerController : MonoBehaviour
         }
         GetPlayerInput();
         MovePlayer();
+        Jump();
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+       
+
+        if (Input.GetKeyDown(KeyCode.X) && isPlayer1Turn)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            InstanDado(rotate1, player1);
+            gameManager.TurnEnded();
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.M) && isPlayer2Turn)
         {
-            InstanDado(rotate);
+            InstanDado(rotate2, player2);
+            gameManager.TurnEnded();
         }
 
     }
 
-    void GetPlayerInput()
+    public virtual void GetPlayerInput()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
     }
 
-    void MovePlayer()
+    public virtual void Jump()
+    {
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+    }
+
+    public virtual void MovePlayer()
     {
         Vector3 move = transform.right * horizontalInput + transform.forward * verticalInput;
         controller.Move(move * speed * Time.deltaTime);
     }
 
-    void InstanDado (Vector3 rota)
+    void InstanDado (Vector3 rota, GameObject player)
     {
-        Instantiate(dado, rota, randomQuat);
+        
+            Instantiate(dado, player.transform.position + (Camera.main.transform.forward) * 1.5f, randomQuat);
     }
-
-    public void TurnEnded()
-    {
-        isPlayerTurn = !isPlayerTurn;
-    }
+    
 }
