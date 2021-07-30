@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] players;
-    public int dado1;
-    public int dado2;
+    public int dado1, dado2;
     public PlayerController playerController;
-    public ColliderDado dadoController;
     public bool twoTurnsEnded;
 
     // Start is called once 
@@ -30,9 +27,11 @@ public class GameManager : MonoBehaviour
         {
             playerController.isPlayer1Turn = false;
             playerController.isPlayer2Turn = false;
+            Debug.Log("ahora no juegan");
             //Funcion de la IA
             twoTurnsEnded = false;
             playerController.isPlayer1Turn = true;
+            Debug.Log("ahora si");
 
         }
         else if (playerController.isPlayer1Turn)

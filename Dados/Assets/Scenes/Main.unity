@@ -10314,19 +10314,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2642311626253648332, guid: ba93fc15ee14dbf45b36696cb946115f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.22002944
+      value: 0.078660965
       objectReference: {fileID: 0}
     - target: {fileID: 2642311626253648332, guid: ba93fc15ee14dbf45b36696cb946115f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.22002944
+      value: -0.07866093
       objectReference: {fileID: 0}
     - target: {fileID: 2642311626253648332, guid: ba93fc15ee14dbf45b36696cb946115f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6720023
+      value: 0.70271796
       objectReference: {fileID: 0}
     - target: {fileID: 2642311626253648332, guid: ba93fc15ee14dbf45b36696cb946115f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.6720023
+      value: 0.70271796
       objectReference: {fileID: 0}
     - target: {fileID: 2642311626253648332, guid: ba93fc15ee14dbf45b36696cb946115f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10338,7 +10338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2642311626253648332, guid: ba93fc15ee14dbf45b36696cb946115f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 143.741
+      value: 167.226
       objectReference: {fileID: 0}
     - target: {fileID: 2642311626253688300, guid: ba93fc15ee14dbf45b36696cb946115f, type: 3}
       propertyPath: m_Name
@@ -16235,13 +16235,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf2a6a1a3411fd4785f1814647be34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players:
-  - {fileID: 1386437948}
-  - {fileID: 1863469981}
   dado1: 0
   dado2: 0
   playerController: {fileID: 1386437950}
-  dadoController: {fileID: 460561173058944724, guid: 9a2488090efe2f043befd858742a3be7, type: 3}
+  twoTurnsEnded: 0
 --- !u!4 &2039012110
 Transform:
   m_ObjectHideFlags: 0
