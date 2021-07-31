@@ -40,6 +40,14 @@ public class Player1 : PlayerController
     {
         Vector3 move = transform.right * (right + left) + transform.forward * (up + down);
         controller.Move(move * speed * Time.deltaTime);
+        if (move == Vector3.zero)
+        {
+            animator.SetBool("isWalking", false);
+        }
+        else
+        {
+            animator.SetBool("isWalking", true);
+        }
     }
 
     public override void Jump()
@@ -47,6 +55,16 @@ public class Player1 : PlayerController
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            animator.SetTrigger("Jump");
+        }
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            animator.SetTrigger("Throw");
         }
     }
 }

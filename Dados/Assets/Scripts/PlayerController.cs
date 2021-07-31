@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     float horizontalInput;
     float verticalInput;
     [SerializeField] float mouseSensivity;
-    protected float speed = 12f;
+    protected float speed = 3f;
     public CharacterController controller;
     public float jumpHeight = 3f;
     public GameManager gameManager;
@@ -35,8 +35,10 @@ public class PlayerController : MonoBehaviour
     public bool isPlayer1Turn;
     public bool isPlayer2Turn;
 
+    public Animator animator;
+
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         randomQuat = new Quaternion(Random.Range(-1, 2), Random.Range(-1, 2), Random.Range(-1, 2), Random.Range(-1, 2));
         rotate1 = player1.transform.position + (Camera.main.transform.forward)*1.5f;
@@ -51,23 +53,13 @@ public class PlayerController : MonoBehaviour
         GetPlayerInput();
         MovePlayer();
         Jump();
-
+        Throw();
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
        
 
-        if (Input.GetKeyDown(KeyCode.X) && isPlayer1Turn)
-        {
-            InstanDado(rotate1, player1);
-            gameManager.TurnEnded();
-        }
-
-        if (Input.GetKeyDown(KeyCode.M) && isPlayer2Turn)
-        {
-            InstanDado(rotate2, player2);
-            gameManager.TurnEnded();
-        }
+        
 
     }
 
@@ -83,18 +75,35 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+
     }
 
     public virtual void MovePlayer()
     {
         Vector3 move = transform.right * horizontalInput + transform.forward * verticalInput;
         controller.Move(move * speed * Time.deltaTime);
+        
     }
 
-    void InstanDado (Vector3 rota, GameObject player)
+    public virtual void InstanDado (Vector3 rota, GameObject player)
     {
         
-            Instantiate(dado, player.transform.position + (Camera.main.transform.forward) * 1.5f, randomQuat);
+            Instantiate(dado, player.transform.position + (Camera.main.transform.forward) * 1.5f, randomQuat);  
+    }
+
+    public virtual void Throw()
+    {
+        if (Input.GetKeyDown(KeyCode.X) && isPlayer1Turn)
+        {
+            InstanDado(rotate1, player1);
+            gameManager.TurnEnded(); 
+        }
+
+        if (Input.GetKeyDown(KeyCode.M) && isPlayer2Turn)
+        {
+            InstanDado(rotate2, player2);
+            gameManager.TurnEnded();
+        }
     }
     
 }
